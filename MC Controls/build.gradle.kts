@@ -6,8 +6,7 @@ plugins {
 }
 
 group = "dev.lynne"
-version = "0.0.0"
-description = "MC Controls"
+version = property("rootProject.version") as String
 
 java {
     toolchain {
