@@ -1,3 +1,7 @@
 rootProject.name = "MC-Controls"
 
-include("bootstrap")
+include(
+    "banner",
+    "bootstrap",
+    "spring"
+)

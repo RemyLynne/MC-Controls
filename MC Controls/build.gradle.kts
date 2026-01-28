@@ -2,6 +2,7 @@ import org.gradle.kotlin.dsl.configure
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 
 plugins {
+    alias(libs.plugins.gradle.git.props) apply false
     alias(libs.plugins.kotlin.jvm) apply false
     alias(libs.plugins.kotlin.spring) apply false
     alias(libs.plugins.spring.boot) apply false
@@ -28,6 +29,7 @@ subprojects {
         dependencies {
             "testRuntimeOnly"(libs.junit.platform.launcher)
             "testImplementation"(libs.kotlin.test.junit5)
+            "testImplementation"(libs.mockk)
             "implementation"(libs.kotlin.reflect)
         }
     }
