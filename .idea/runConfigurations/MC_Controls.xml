@@ -1,6 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="MC Controls" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
     <module name="MC-Controls.bootstrap.main" />
+    <option name="PROGRAM_PARAMETERS" value="serve" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="dev.lynne.mc_controls.bootstrap.McControlsApplication" />
     <method v="2">
       <option name="Make" enabled="true" />

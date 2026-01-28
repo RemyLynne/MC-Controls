@@ -12,6 +12,7 @@ dependencies {
     implementation(libs.spring.boot.starter)
     testImplementation(libs.spring.boot.starter.test)
     implementation(project(":banner"))
+    implementation(project(":domain:validation"))
     implementation(project(":spring"))
 }
 

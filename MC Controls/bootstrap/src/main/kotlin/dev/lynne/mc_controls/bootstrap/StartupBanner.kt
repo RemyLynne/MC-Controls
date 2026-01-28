@@ -4,6 +4,7 @@ import dev.lynne.mc_controls.banner.Banner
 import dev.lynne.mc_controls.banner.data.BannerDataBlock
 import dev.lynne.mc_controls.banner.data.BannerDataEntry
 import dev.lynne.mc_controls.spring.GitPropertyKeys
+import dev.lynne.mc_controls.spring.ServerType
 import org.springframework.boot.ansi.AnsiColor
 import org.springframework.boot.ansi.AnsiOutput
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -97,6 +98,15 @@ class StartupBanner : SpringBanner {
         ))
 
         val profiles = environment.activeProfiles
+
+        // Mode
+        val mode = if (ServerType.SERVER() in profiles)
+            "Server"
+        else if (ServerType.CLI() in profiles)
+            "CLI"
+        else
+            AnsiOutput.toString(AnsiColor.RED, "UNKNOWN")
+        block.entries.add(BannerDataEntry("Mode", mode))
 
         //Profiles
         block.entries.add(BannerDataEntry("Profiles", profiles.joinToString()))

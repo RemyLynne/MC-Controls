@@ -3,6 +3,7 @@ package dev.lynne.mc_controls.bootstrap
 import dev.lynne.mc_controls.banner.Banner
 import dev.lynne.mc_controls.banner.data.BannerDataBlock
 import dev.lynne.mc_controls.spring.GitPropertyKeys
+import dev.lynne.mc_controls.spring.ServerType
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.assertThrows
 import org.springframework.boot.SpringApplication
@@ -153,6 +154,58 @@ class StartupBannerTest {
 
         assertTrue(builtExcludingVersion.contains("Running non-built version"), "with an absence of version, unbuilt marker should be added")
         assertFalse(builtIncludingVersion.contains("Running non-built version"), "with a version, unbuilt marker should NOT be added")
+    }
+
+    @Test
+    fun `createServiceEntry shows Server when server profile active`() {
+        val serverType = ServerType.SERVER()
+        env.setActiveProfiles(serverType)
+
+        build()
+
+        val built = serviceBlock.build(50)
+
+
+        val modeLineRegex = Regex("Mode\\s+:\\sServer")
+        assertTrue(built.contains(modeLineRegex), "The text should contain a line with the app mode")
+
+        val escapedServerType = Regex.escape(serverType)
+        val profilesLineRegex = Regex("Profiles\\s+:\\s$escapedServerType")
+        assertTrue(built.contains(profilesLineRegex), "The text should contain a line with the ${ServerType.SERVER.name} ServerType profile")
+    }
+
+    @Test
+    fun `createServiceEntry shows CLI when cli profile active`() {
+        val serverType = ServerType.CLI()
+        env.setActiveProfiles(serverType)
+
+        build()
+
+        val built = serviceBlock.build(50)
+
+        val modeLineRegex = Regex("Mode\\s+:\\sCLI")
+        assertTrue(built.contains(modeLineRegex), "The text should contain a line with the app mode")
+
+        val escapedServerType = Regex.escape(serverType)
+        val profilesLineRegex = Regex("Profiles\\s+:\\s$escapedServerType")
+        assertTrue(built.contains(profilesLineRegex), "The text should contain a line with the ${ServerType.CLI.name} ServerType profile")
+    }
+
+    @Test
+    fun `createServiceEntry shows UNKNOWN when no known profile active`() {
+        val serverType = "notARealType"
+        env.setActiveProfiles(serverType)
+
+        build()
+
+        val built = serviceBlock.build(50)
+
+        val modeLineRegex = Regex("Mode\\s+:\\sUNKNOWN")
+        assertTrue(built.contains(modeLineRegex), "The text should contain a line with the app mode")
+
+        val escapedServerType = Regex.escape(serverType)
+        val profilesLineRegex = Regex("Profiles\\s+:\\s$escapedServerType")
+        assertTrue(built.contains(profilesLineRegex), "The text should contain a line with the profile, even tho it is not a valid serverType")
     }
 
 
