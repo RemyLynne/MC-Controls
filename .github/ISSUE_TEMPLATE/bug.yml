@@ -1,0 +1,79 @@
+name: Bug Report
+description: File a bug report.
+title: "[Bug]: "
+labels: ["bug"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! Please fill out the details below.
+
+  - type: input
+    id: summary
+    attributes:
+      label: Bug summary
+      description: A short, clear description of the bug.
+      placeholder: "App crashes when clicking Save"
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: How can we reproduce the issue?
+      placeholder: |
+        1. Go to '...'
+        2. Click on '...'
+        3. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What did you expect to happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: What actually happened?
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots or logs
+      description: Add screenshots, error messages, or logs if applicable.
+      render: shell
+
+  - type: input
+    id: browser
+    attributes:
+      label: Browser
+      description: Browsers where you found the bug, if applicable.
+      placeholder: "Chrome 120"
+
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: The version you found the bug in.
+      placeholder: "v1.2.3"
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Pre-flight checklist
+      options:
+        - label: I have searched existing issues
+          required: true
+        - label: I can reproduce this issue consistently
+          required: false
+

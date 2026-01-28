@@ -1,0 +1,71 @@
+name: Feature request
+description: Suggest an idea or enhancement
+title: "[Feature]: "
+labels: ["enhancement"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for sharing your idea! Please provide as much detail as you can.
+
+  - type: input
+    id: summary
+    attributes:
+      label: Feature summary
+      description: A short, clear description of the feature.
+      placeholder: "Add dark mode support"
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / use case
+      description: What problem does this feature solve? Who is it for?
+      placeholder: |
+        I'm frustrated when...
+        This would help users who...
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: Describe how you think this feature could work.
+      placeholder: |
+        I imagine this working by...
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional context
+      description: Mockups, links, screenshots, or other context.
+      placeholder: "Links, screenshots, references..."
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How important is this feature to you?
+      options:
+        - Nice to have
+        - Medium priority
+        - High priority
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Pre-flight checklist
+      options:
+        - label: I have searched existing issues and feature requests
+          required: true
+        - label: I am willing to help implement this feature
+          required: false
+
