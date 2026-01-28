@@ -1,37 +1,37 @@
+import org.gradle.kotlin.dsl.configure
+import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
+
 plugins {
-    alias(libs.plugins.kotlin.jvm)
-    alias(libs.plugins.kotlin.spring)
-    alias(libs.plugins.spring.boot)
-    alias(libs.plugins.spring.dep.mgmt)
+    alias(libs.plugins.kotlin.jvm) apply false
+    alias(libs.plugins.kotlin.spring) apply false
+    alias(libs.plugins.spring.boot) apply false
+    alias(libs.plugins.spring.dep.mgmt) apply false
 }
 
-group = "dev.lynne"
-version = property("rootProject.version") as String
+allprojects {
+    group = "dev.lynne.mc_controls"
+    version = property("rootProject.version") as String
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+    repositories {
+        mavenCentral()
     }
 }
 
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    implementation(libs.spring.boot.starter)
-    implementation(libs.kotlin.reflect)
-    testImplementation(libs.spring.boot.starter.test)
-    testImplementation(libs.kotlin.test.junit5)
-    testRuntimeOnly(libs.junit.platform.launcher)
-}
-
-kotlin {
-    compilerOptions {
-        freeCompilerArgs.addAll("-Xjsr305=strict", "-Xannotation-default-target=param-property")
+subprojects {
+    pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
+        extensions.configure<KotlinJvmProjectExtension> {
+            jvmToolchain(21)
+            compilerOptions {
+                freeCompilerArgs.addAll("-Xjsr305=strict", "-Xannotation-default-target=param-property")
+            }
+        }
+        dependencies {
+            "testRuntimeOnly"(libs.junit.platform.launcher)
+            "testImplementation"(libs.kotlin.test.junit5)
+            "implementation"(libs.kotlin.reflect)
+        }
     }
-}
-
-tasks.withType<Test> {
-    useJUnitPlatform()
+    tasks.withType<Test> {
+        useJUnitPlatform()
+    }
 }

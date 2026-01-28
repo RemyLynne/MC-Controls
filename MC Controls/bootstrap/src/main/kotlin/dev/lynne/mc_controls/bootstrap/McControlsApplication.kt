@@ -1,4 +1,4 @@
-package dev.lynne.mc_controls
+package dev.lynne.mc_controls.bootstrap
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

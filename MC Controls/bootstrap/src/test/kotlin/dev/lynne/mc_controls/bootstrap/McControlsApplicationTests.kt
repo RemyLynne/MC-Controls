@@ -1,4 +1,4 @@
-package dev.lynne.mc_controls
+package dev.lynne.mc_controls.bootstrap
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
