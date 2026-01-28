@@ -1,8 +1,9 @@
 name: Feature request
 description: Suggest an idea or enhancement
 title: "[Feature]: "
-labels: ["enhancement"]
-assignees: []
+labels:
+  - "type: enhancement"
+  - "status: waiting-for-triage"
 
 body:
   - type: markdown
