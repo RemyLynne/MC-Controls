@@ -1,0 +1,9 @@
+/*
+!/.gitignore
+!/conventionalCommit.xml
+!/modules.xml
+!gradle.xml
+!kotlinc.xml
+!/vcs.xml
+!/plugins
+!/runConfigurations
