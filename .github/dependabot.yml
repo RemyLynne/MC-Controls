@@ -4,13 +4,22 @@ updates:
     directory: "/MC Controls"
     schedule:
       interval: "daily"
+    labels:
+      - "type: dependencies"
+      - "area: backend"
 
   - package-ecosystem: "npm"
     directory: "/WebContent"
     schedule:
       interval: "daily"
+    labels:
+      - "type: dependencies"
+      - "area: frontend"
 
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
+    labels:
+      - "type: dependencies"
+      - "area: github"
