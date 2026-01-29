@@ -1,0 +1,30 @@
+package dev.lynne.mc_controls.bootstrap
+
+import dev.lynne.mc_controls.bootstrap.mode.ModeResolver
+import dev.lynne.mc_controls.bootstrap.profile.ProfilePolicy
+import dev.lynne.mc_controls.bootstrap.profile.ProfileSources
+import org.springframework.boot.Banner
+import org.springframework.context.ConfigurableApplicationContext
+
+class Bootstrap(
+    private val modeResolver: ModeResolver = ModeResolver(),
+    private val profileSources: ProfileSources = ProfileSources(),
+    private val profilePolicy: ProfilePolicy = ProfilePolicy(),
+    private val appFactory: AppFactory = AppFactory(),
+    private val appConfigurer: AppConfigurer = AppConfigurer()
+) {
+    fun run(primarySource: Class<*>, args: Array<String>): ConfigurableApplicationContext {
+        val resolvedMode = modeResolver.resolve(args)
+        val explicitProfiles = profileSources.explicitProfiles(args)
+
+        profilePolicy.check(explicitProfiles, resolvedMode.profilesToAdd)
+
+        val app = appFactory.create(primarySource)
+
+        app.setBannerMode(Banner.Mode.LOG)
+        app.setBanner(StartupBanner())
+
+        appConfigurer.configure(app, resolvedMode)
+        return app.run(*args)
+    }
+}
