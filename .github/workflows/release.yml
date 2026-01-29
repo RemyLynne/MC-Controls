@@ -1,0 +1,235 @@
+name: Release
+on:
+  workflow_dispatch:
+    inputs:
+      base_version:
+        description: "Version (eg. 1.2.3)"
+        required: true
+      channel:
+        description: "Release channel"
+        type: choice
+        required: true
+        default: stable
+        options: [stable, beta, rc]
+
+permissions:
+  contents: write
+  packages: write
+  id-token: write
+
+env:
+  REGISTRY: ghcr.io
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    if: ${{ !contains(github.event.head_commit.message, '[skip ci]') }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0  # important: tags/history
+      - name: Compute release version
+        id: ver
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE="${{ inputs.base_version }}"
+          CHANNEL="${{ inputs.channel }}"
+
+          if [[ ! "$BASE" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "base_version must look like SemVer (1.2.3)"
+            exit 1
+          fi
+
+          # ensure we have tags
+          git fetch --tags --force
+
+          PRERELEASE="false"
+          VERSION="$BASE"
+
+          if [[ "$CHANNEL" == "stable" ]]; then
+            VERSION="$BASE"
+            PRERELEASE="false"
+          else
+            PRERELEASE="true"
+            SUFFIX="$CHANNEL"  # "beta" or "rc"
+
+            # Find the highest existing N for vBASE-SUFFIX.N
+            # Example tags: v1.2.3-rc.1, v1.2.3-rc.2
+            PATTERN="^v${BASE}-${SUFFIX}\.([0-9]+)$"
+
+            MAX=0
+            while read -r tag; do
+              if [[ "$tag" =~ $PATTERN ]]; then
+                n="${BASH_REMATCH[1]}"
+                if (( n > MAX )); then MAX="$n"; fi
+              fi
+            done < <(git tag -l "v${BASE}-${SUFFIX}.*")
+
+            NEXT=$((MAX + 1))
+            VERSION="${BASE}-${SUFFIX}.${NEXT}"
+          fi
+
+          TAG="v${VERSION}"
+
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "prerelease=$PRERELEASE" >> "$GITHUB_OUTPUT"
+
+          echo "Computed VERSION=$VERSION"
+          echo "Computed TAG=$TAG"
+          echo "Computed PRERELEASE=$PRERELEASE"
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - name: Set up Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+          cache: "pnpm"
+          cache-dependency-path: WebContent/pnpm-lock.yaml
+      - name: Set versions
+        shell: bash
+        run: |
+          set -euo pipefail
+          V="${{ steps.ver.outputs.version }}"
+          
+          # 1) Gradle project version:
+          if [[ -f "MC Controls/gradle.properties" ]]; then
+            sed -i -E "s/^rootProject\.version=.*/rootProject\.version=$V/" "MC Controls/gradle.properties"
+          fi
+          # 2) Frontend package.json version (optional):
+          if [[ -f "WebContent/package.json" ]]; then
+            node -e "const fs=require('fs'); const p='WebContent/package.json'; const j=JSON.parse(fs.readFileSync(p,'utf8')); j.version='${V}'; fs.writeFileSync(p, JSON.stringify(j,null,4)+'\n');"
+          fi
+      - name: Commit version bump
+        shell: bash
+        run: |
+          set -euo pipefail
+          V="${{ steps.ver.outputs.version }}"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "chore(release): v$V [skip ci]" || {
+            echo "No changes to commit."
+            exit 1
+          }
+      - name: Create tag
+        shell: bash
+        run: |
+          set -euo pipefail
+          TAG="${{ steps.ver.outputs.tag }}"
+          CHANNEL="${{ inputs.channel }}"
+
+          if git rev-parse "refs/tags/release/${CHANNEL}/${TAG}" >/dev/null 2>&1; then
+            echo "Tag ${TAG} already exists"
+            exit 1
+          fi
+
+          git tag -a "release/${CHANNEL}/${TAG}" -m "${TAG}"
+      - name: Push commit + tag
+        shell: bash
+        run: |
+          set -euo pipefail
+          git push origin
+          git push origin --tags
+      - name: Install frontend dependencies
+        working-directory: WebContent
+        shell: bash
+        run: |
+          set -euo pipefail
+          pnpm install --frozen-lockfile
+      - name: Build frontend
+        working-directory: WebContent
+        shell: bash
+        run: |
+          set -euo pipefail
+          npx nx run-many -t build
+      - name: Set up Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: gradle
+      - name: Build bootJar
+        working-directory: MC Controls
+        shell: bash
+        run: |
+          set -euo pipefail
+          ./gradlew --no-daemon clean bootJar
+          ls -lah bootstrap/build/libs
+      - name: Pick JAR path
+        id: jar
+        working-directory: backend
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Prefer non-plain boot jar if both exist
+          JAR="$(ls -t bootstrap/build/libs/*.jar | grep -v -- '-plain\.jar$' | head -n 1 || true)"
+          if [[ -z "${JAR}" ]]; then
+            JAR="$(ls -t bootstrap/build/libs/*.jar | head -n 1)"
+          fi
+          echo "jar=$JAR" >> "$GITHUB_OUTPUT"
+          echo "Computed jar=$JAR"
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Log into GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Docker metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ github.repository }}
+          tags: |
+            type=raw,value=${{ steps.ver.outputs.version }}
+            type=raw,value=${{ steps.ver.outputs.tag }}
+            type=raw,value=${{ inputs.channel }}
+            type=raw,value=latest,enable=${{ inputs.channel == 'stable' }}
+          labels: |
+            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
+            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.version=${{ steps.ver.outputs.version }}
+      - name: Build and push Docker image
+        id: build-and-push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          TAG="${{ steps.ver.outputs.tag }}"
+          VERSION="${{ steps.ver.outputs.version }}"
+          CHANNEL="${{ inputs.channel }}"
+
+          JAR_PATH="MC Controls/${{ steps.jar.outputs.jar }}"
+
+          # copy to a nice filename for the release asset
+          ASSET="mc_controls-${VERSION}.jar"
+          cp "$JAR_PATH" "$ASSET"
+
+          FLAGS=(--generate-notes)
+          if [[ "${CHANNEL}" != "stable" ]]; then
+            FLAGS+=(--prerelease)
+          fi
+
+          # Attach asset by listing it as a positional argument
+          gh release create "release/${CHANNEL}/${TAG}" \
+            --title "${TAG}" \
+            "${FLAGS[@]}" \
+            "$ASSET"
