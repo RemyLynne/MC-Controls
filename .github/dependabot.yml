@@ -1,0 +1,16 @@
+version: 2
+updates:
+  - package-ecosystem: "gradle"
+    directory: "/MC Controls"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "npm"
+    directory: "/WebContent"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
