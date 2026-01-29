@@ -8,17 +8,17 @@ spring-dep-mgmt  = "1.1.7"
 
 [plugins]
 gradle-git-props = { id = "com.gorylenko.gradle-git-properties", version.ref = "gradle-git-props" }
-kotlin-jvm       = { id = "org.jetbrains.kotlin.jvm",           version.ref = "kotlin"          }
-kotlin-spring    = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin"          }
-spring-boot      = { id = "org.springframework.boot",           version.ref = "spring-boot"     }
-spring-dep-mgmt  = { id = "io.spring.dependency-management",    version.ref = "spring-dep-mgmt" }
+kotlin-jvm       = { id = "org.jetbrains.kotlin.jvm",            version.ref = "kotlin"           }
+kotlin-spring    = { id = "org.jetbrains.kotlin.plugin.spring",  version.ref = "kotlin"           }
+spring-boot      = { id = "org.springframework.boot",            version.ref = "spring-boot"      }
+spring-dep-mgmt  = { id = "io.spring.dependency-management",     version.ref = "spring-dep-mgmt"  }
 
 [libraries]
 jfiglet                  = { group = "com.github.lalyos",        name = "jfiglet",                 version.ref = "jfiglet" }
 junit-platform-launcher  = { group = "org.junit.platform",       name = "junit-platform-launcher"  }
 kotlin-reflect           = { group = "org.jetbrains.kotlin",     name = "kotlin-reflect"           }
 kotlin-test-junit5       = { group = "org.jetbrains.kotlin",     name = "kotlin-test-junit5"       }
-mockk                    = { group = "io.mockk",                 name = "mockk",                       version.ref = "mockk" }
+mockk                    = { group = "io.mockk",                 name = "mockk",                   version.ref = "mockk"   }
 spring-boot-starter      = { group = "org.springframework.boot", name = "spring-boot-starter"      }
 spring-boot-starter-test = { group = "org.springframework.boot", name = "spring-boot-starter-test" }
 spring-boot-starter-web  = { group = "org.springframework.boot", name = "spring-boot-starter-web"  }
