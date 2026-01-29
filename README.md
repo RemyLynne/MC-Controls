@@ -29,20 +29,6 @@ A Simple control panel for your minecraft server(s), with the access to have act
 
 
 
-<!-- INSTALLATION -->
-## Installation
-
-#TODO
-
-
-
-<!-- USAGE -->
-## Usage
-
-#TODO
-
-
-
 <!-- CONTRIBUTING -->
 ## Top Contributors
 
