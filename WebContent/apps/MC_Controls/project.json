@@ -57,7 +57,10 @@
           "buildTarget": "MC_Controls:build:development"
         }
       },
-      "defaultConfiguration": "development"
+      "defaultConfiguration": "development",
+      "options": {
+        "proxyConfig": "proxy.conf.json"
+      }
     },
     "lint": {
       "executor": "@nx/eslint:lint"

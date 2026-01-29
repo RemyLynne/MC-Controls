@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$/MC Controls/bootstrap" />
             <option value="$PROJECT_DIR$/MC Controls/domain" />
             <option value="$PROJECT_DIR$/MC Controls/domain/validation" />
+            <option value="$PROJECT_DIR$/MC Controls/frontend" />
             <option value="$PROJECT_DIR$/MC Controls/spring" />
           </set>
         </option>

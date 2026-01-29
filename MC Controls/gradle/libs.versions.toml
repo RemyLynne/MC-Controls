@@ -21,3 +21,4 @@ kotlin-test-junit5       = { group = "org.jetbrains.kotlin",     name = "kotlin-
 mockk                    = { group = "io.mockk",                 name = "mockk",                       version.ref = "mockk" }
 spring-boot-starter      = { group = "org.springframework.boot", name = "spring-boot-starter"      }
 spring-boot-starter-test = { group = "org.springframework.boot", name = "spring-boot-starter-test" }
+spring-boot-starter-web  = { group = "org.springframework.boot", name = "spring-boot-starter-web"  }
