@@ -6,9 +6,10 @@
 [![Issues][issues-shield]][issues-url]
 [![Pull Requests][pr-shield]][pr-url]
 <br/>
-[![Test status][github-actions-ci-shield]][github-actions-ci-url]
-<br>
 [![MIT License][license-shield]][license-url]
+<br>
+<br>
+[![Tests][github-actions-tests-shield]][github-actions-tests-url]
 
 
 
@@ -70,5 +71,5 @@ Distributed under the MIT License. See `LICENSE` for more information.
 [pr-url]: https://github.com/RemyLynne/MC-Controls/pulls
 [license-shield]: https://img.shields.io/github/license/RemyLynne/MC-Controls.svg?style=for-the-badge
 [license-url]: https://github.com/RemyLynne/MC-Controls/blob/master/LICENSE.txt
-[github-actions-ci-shield]: https://img.shields.io/github/actions/workflow/status/RemyLynne/MC-Controls/test.yml?branch=master&label=Tests&style=for-the-badge
-[github-actions-ci-url]: https://github.com/expressjs/express/actions/workflows/ci.yml
+[github-actions-tests-shield]: https://github.com/RemyLynne/MC-Controls/actions/workflows/test.yml/badge.svg
+[github-actions-tests-url]: https://github.com/RemyLynne/MC-Controls/actions/workflows/test.yml
