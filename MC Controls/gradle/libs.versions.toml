@@ -14,11 +14,13 @@ spring-boot      = { id = "org.springframework.boot",            version.ref = "
 spring-dep-mgmt  = { id = "io.spring.dependency-management",     version.ref = "spring-dep-mgmt"  }
 
 [libraries]
-jfiglet                  = { group = "com.github.lalyos",        name = "jfiglet",                 version.ref = "jfiglet" }
-junit-platform-launcher  = { group = "org.junit.platform",       name = "junit-platform-launcher"  }
-kotlin-reflect           = { group = "org.jetbrains.kotlin",     name = "kotlin-reflect"           }
-kotlin-test-junit5       = { group = "org.jetbrains.kotlin",     name = "kotlin-test-junit5"       }
-mockk                    = { group = "io.mockk",                 name = "mockk",                   version.ref = "mockk"   }
-spring-boot-starter      = { group = "org.springframework.boot", name = "spring-boot-starter"      }
-spring-boot-starter-test = { group = "org.springframework.boot", name = "spring-boot-starter-test" }
-spring-boot-starter-web  = { group = "org.springframework.boot", name = "spring-boot-starter-web"  }
+jfiglet                      = { group = "com.github.lalyos",        name = "jfiglet",                     version.ref = "jfiglet" }
+junit-platform-launcher      = { group = "org.junit.platform",       name = "junit-platform-launcher"      }
+kotlin-reflect               = { group = "org.jetbrains.kotlin",     name = "kotlin-reflect"               }
+kotlin-test-junit5           = { group = "org.jetbrains.kotlin",     name = "kotlin-test-junit5"           }
+mockk                        = { group = "io.mockk",                 name = "mockk",                       version.ref = "mockk"   }
+spring-boot-devtools         = { group = "org.springframework.boot", name = "spring-boot-devtools"         }
+spring-boot-starter          = { group = "org.springframework.boot", name = "spring-boot-starter"          }
+spring-boot-starter-actuator = { group = "org.springframework.boot", name = "spring-boot-starter-actuator" }
+spring-boot-starter-test     = { group = "org.springframework.boot", name = "spring-boot-starter-test"     }
+spring-boot-starter-web      = { group = "org.springframework.boot", name = "spring-boot-starter-web"      }
