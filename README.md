@@ -10,6 +10,7 @@
 <br>
 <br>
 [![Tests][github-actions-tests-shield]][github-actions-tests-url]
+[![CodeQL][github-actions-codeql-shield]][github-actions-codeql-url]
 
 
 
@@ -73,3 +74,5 @@ Distributed under the MIT License. See `LICENSE` for more information.
 [license-url]: https://github.com/RemyLynne/MC-Controls/blob/master/LICENSE.txt
 [github-actions-tests-shield]: https://github.com/RemyLynne/MC-Controls/actions/workflows/test.yml/badge.svg
 [github-actions-tests-url]: https://github.com/RemyLynne/MC-Controls/actions/workflows/test.yml
+[github-actions-codeql-shield]: https://github.com/RemyLynne/MC-Controls/actions/workflows/github-code-scanning/codeql/badge.svg
+[github-actions-codeql-url]: https://github.com/RemyLynne/MC-Controls/actions/workflows/github-code-scanning/codeql
