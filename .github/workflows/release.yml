@@ -102,7 +102,7 @@ jobs:
           fi
           # 2) Frontend package.json version (optional):
           if [[ -f "WebContent/package.json" ]]; then
-            node -e "const fs=require('fs'); const p='WebContent/package.json'; const j=JSON.parse(fs.readFileSync(p,'utf8')); j.version='${V}'; fs.writeFileSync(p, JSON.stringify(j,null,4)+'\n');"
+            node -e "const fs=require('fs'); const p='WebContent/package.json'; const j=JSON.parse(fs.readFileSync(p,'utf8')); j.version='${V}'; fs.writeFileSync(p, JSON.stringify(j,null,2)+'\n');"
           fi
       - name: Commit version bump
         shell: bash
@@ -162,7 +162,7 @@ jobs:
           ls -lah bootstrap/build/libs
       - name: Pick JAR path
         id: jar
-        working-directory: backend
+        working-directory: MC Controls
         shell: bash
         run: |
           set -euo pipefail
