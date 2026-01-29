@@ -1,6 +1,22 @@
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} %clr(%level) [%thread] %clr(%logger){cyan} - %clr(%msg){%p}%n"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  info:
+    git:
+      mode: full
 spring:
   application:
     name: MC Controls
   config:
     import:
       - optional:classpath:git.properties
+  devtools:
+    add-properties: false
+  main:
+    allow-bean-definition-overriding: false
+    lazy-initialization: true
