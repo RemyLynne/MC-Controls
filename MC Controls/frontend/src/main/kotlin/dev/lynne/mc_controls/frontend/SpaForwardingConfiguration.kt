@@ -7,9 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 @Configuration
 class SpaForwardingConfiguration : WebMvcConfigurer {
     override fun addViewControllers(registry: ViewControllerRegistry) {
-        registry.addViewController("/{path:^(?!api$|ws$|actuator$)[^\\.]+$}")
-            .setViewName("forward:/index.html")
-        registry.addViewController("/{basePath:^(?!api$|ws$|actuator$)[^\\.]+$}/**/{path:[^\\.]+$}")
+        registry.addViewController("/**/{path:^(?!api$|ws$|actuator$)[^\\.]+$}")
             .setViewName("forward:/index.html")
     }
 }
