@@ -242,7 +242,7 @@ jobs:
             --json url -q .url)"
           
           echo "url=$url" >> "$GITHUB_OUTPUT"
-        if: always()
+      - if: always()
         shell: bash
         run: |
           set -euo pipefail
