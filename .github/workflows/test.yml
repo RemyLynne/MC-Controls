@@ -51,6 +51,7 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
         with:
+          check_name: 'MC-Controls Test Results'
           files: |
             MC Controls/**/build/test-results/test/*.xml
 
@@ -147,5 +148,6 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
         with:
+          check_name: 'WebContent Test Results'
           files: |
             WebContent/**/dist/test-results/test/*.xml
