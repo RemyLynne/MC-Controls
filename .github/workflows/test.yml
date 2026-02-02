@@ -7,6 +7,7 @@ on:
 permissions:
   contents: read
   pull-requests: read
+  checks: write
 
 jobs:
   changes:
@@ -45,6 +46,12 @@ jobs:
       - name: Run tests
         working-directory: MC Controls
         run: ./gradlew test
+      - name: Publish test results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: |
+            MC Controls/**/build/test-results/test/*.xml
 
   Frontend-lint:
     name: Frontend lint
@@ -68,7 +75,49 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Lint
         working-directory: WebContent
-        run: npx nx run-many -t lint
+        run: npx nx run-many -t lint -- --format json --output-file dist/eslint-report.json
+      - name: ESLint summary
+        if: always()
+        working-directory: WebContent
+        run: |
+          echo "## Frontend lint" >> "$GITHUB_STEP_SUMMARY"
+          if [ ! -f "dist/eslint-report.json" ]; then
+            echo "- No eslint-report.json found (lint may have failed early)." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+
+          node - <<'NODE'
+          const fs = require('fs');
+          const report = JSON.parse(fs.readFileSync('dist/eslint-report.json', 'utf8'));
+
+          let files = 0, errors = 0, warnings = 0;
+          const offenders = [];
+          for (const r of report) {
+            files++;
+            errors += r.errorCount || 0;
+            warnings += r.warningCount || 0;
+            const total = (r.errorCount || 0) + (r.warningCount || 0);
+            if (total) offenders.push({ file: r.filePath, errors: r.errorCount||0, warnings: r.warningCount||0, total });
+          }
+
+          offenders.sort((a,b)=>b.total-a.total);
+          const top = offenders.slice(0, 10);
+
+          const out = [];
+          out.push(`- Files checked: **${files}**`);
+          out.push(`- Errors: **${errors}**`);
+          out.push(`- Warnings: **${warnings}**`);
+
+          if (top.length) {
+            out.push('');
+            out.push('**Top files:**');
+            for (const t of top) {
+              out.push(`- \`${t.file.replace(process.cwd() + '/', '')}\` — ${t.errors} error(s), ${t.warnings} warning(s)`);
+            }
+          }
+
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, out.join('\n') + '\n');
+          NODE
 
   Frontend-tests:
     name: Frontend tests
@@ -93,3 +142,9 @@ jobs:
       - name: Run tests
         working-directory: WebContent
         run: npx nx run-many -t test
+      - name: Publish test results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: |
+            WebContent/**/dist/test-results/test/*.xml
