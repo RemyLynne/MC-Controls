@@ -18,7 +18,6 @@ env:
 jobs:
   release:
     runs-on: ubuntu-latest
-    if: ${{ !contains(github.event.head_commit.message, '[skip ci]') }}
     permissions:
       contents: write
       packages: write
@@ -213,6 +212,7 @@ jobs:
           git push origin
           git push origin --tags
       - name: Create GitHub Release
+        id: ghrel
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
@@ -235,7 +235,61 @@ jobs:
           fi
 
           # Attach asset by listing it as a positional argument
-          gh release create "release/${CHANNEL}/${TAG}" \
+          url="$(gh release create "release/${CHANNEL}/${TAG}" \
             --title "${TAG}" \
             "${FLAGS[@]}" \
-            "$ASSET"
+            "$ASSET" \
+            --json url -q .url)"
+          
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          VERSION="${{ steps.ver.outputs.version }}"
+          TAG="${{ steps.ver.outputs.tag }}"
+          CHANNEL="${{ inputs.channel }}"
+          PRERELEASE="${{ steps.ver.outputs.prerelease }}"
+
+          DIGEST="${{ steps.push.outputs.digest }}"
+          IMAGE="${{ env.REGISTRY }}/${{ github.repository }}"
+          REL_URL="${{ steps.ghrel.outputs.url }}"
+
+          RELEASE_TAG="release/${CHANNEL}/${TAG}"
+          ASSET="mc_controls-${VERSION}.jar"
+
+          REPO_URL="${{ github.server_url }}/${{ github.repository }}"
+          RUN_URL="${REPO_URL}/actions/runs/${{ github.run_id }}"
+          RELEASE_URL="${REPO_URL}/releases/tag/${RELEASE_TAG}"
+
+          {
+            echo "# Release summary"
+            echo ""
+            echo "## Version"
+            echo "- Channel: **${CHANNEL}**"
+            echo "- Version: **${VERSION}**"
+            echo "- Tag: **${RELEASE_TAG}**"
+            echo "- Prerelease: **${PRERELEASE}**"
+            echo ""
+            echo "## Source"
+            echo "- Commit: \`${{ github.sha }}\`"
+            echo "- Run: ${RUN_URL}"
+            echo ""
+            echo "## Artifacts"
+            echo "- Release asset: **${ASSET}**"
+            echo "- Docker image: \`${IMAGE}\`"
+            if [[ -n "${DIGEST}" ]]; then
+              echo "- Digest: \`${DIGEST}\`"
+              echo "- Image ref: \`${IMAGE}@${DIGEST}\`"
+            else
+              echo "- Digest: *(not available)*"
+            fi
+            echo ""
+            echo "## Links"
+            if [[ -n "${REL_URL}" ]]; then
+              echo "- GitHub Release: ${REL_URL}" >> "$GITHUB_STEP_SUMMARY"
+            else
+              echo "- GitHub Release: ${RELEASE_URL}" >> "$GITHUB_STEP_SUMMARY"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
