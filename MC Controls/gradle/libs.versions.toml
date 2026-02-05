@@ -1,5 +1,5 @@
 [versions]
-gradle-git-props = "2.5.4"
+gradle-git-props = "2.5.5"
 jfiglet          = "0.0.9"
 kotlin           = "2.2.21"
 mockk            = "1.14.9"
