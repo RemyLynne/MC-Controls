@@ -1,7 +1,7 @@
 [versions]
 gradle-git-props = "2.5.4"
 jfiglet          = "0.0.9"
-kotlin           = "2.2.21"
+kotlin           = "2.3.10"
 mockk            = "1.14.9"
 spring-boot      = "4.0.2"
 spring-dep-mgmt  = "1.1.7"
