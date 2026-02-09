@@ -13,6 +13,14 @@
             <option value="$PROJECT_DIR$/MC Controls/domain" />
             <option value="$PROJECT_DIR$/MC Controls/domain/validation" />
             <option value="$PROJECT_DIR$/MC Controls/frontend" />
+            <option value="$PROJECT_DIR$/MC Controls/iam" />
+            <option value="$PROJECT_DIR$/MC Controls/iam/adapter-in-cli" />
+            <option value="$PROJECT_DIR$/MC Controls/iam/adapter-in-web" />
+            <option value="$PROJECT_DIR$/MC Controls/iam/adapter-out-persistence" />
+            <option value="$PROJECT_DIR$/MC Controls/iam/adapter-out-security" />
+            <option value="$PROJECT_DIR$/MC Controls/iam/application" />
+            <option value="$PROJECT_DIR$/MC Controls/iam/bootstrap" />
+            <option value="$PROJECT_DIR$/MC Controls/iam/domain" />
             <option value="$PROJECT_DIR$/MC Controls/spring" />
           </set>
         </option>

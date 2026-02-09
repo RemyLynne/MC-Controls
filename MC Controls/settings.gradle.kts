@@ -5,5 +5,15 @@ include(
     "bootstrap",
     "domain:validation",
     "frontend",
-    "spring"
+    "spring",
+
+    // IAM
+    "iam:adapter-in-cli",
+    "iam:adapter-in-web",
+    "iam:adapter-out-persistence",
+    "iam:adapter-out-security",
+    "iam:application",
+    "iam:bootstrap",
+    "iam:domain",
+
 )

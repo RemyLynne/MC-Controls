@@ -17,6 +17,8 @@ dependencies {
     implementation(project(":domain:validation"))
     implementation(project(":frontend"))
     implementation(project(":spring"))
+
+    implementation(project(":iam:bootstrap"))
 }
 
 gitProperties {
