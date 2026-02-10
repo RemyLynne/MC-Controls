@@ -15,8 +15,19 @@ spring:
   config:
     import:
       - optional:classpath:git.properties
+  datasource:
+    driver-class-name: org.sqlite.JDBC
+    url: jdbc:sqlite:${APP_SQLITE_DB_PATH:./data/app.db}
   devtools:
     add-properties: false
+  flyway:
+    baseline-on-migrate: true
+    baseline-version: 0
+    enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
   main:
     allow-bean-definition-overriding: false
     lazy-initialization: true

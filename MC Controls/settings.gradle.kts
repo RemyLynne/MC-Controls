@@ -8,6 +8,7 @@ include(
     "spring",
 
     // IAM
+    "iam",
     "iam:adapter-in-cli",
     "iam:adapter-in-web",
     "iam:adapter-out-persistence",

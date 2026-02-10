@@ -5,6 +5,7 @@ kotlin           = "2.2.21"
 mockk            = "1.14.9"
 spring-boot      = "4.0.2"
 spring-dep-mgmt  = "1.1.7"
+sqlite           = "3.49.1.0"
 
 [plugins]
 gradle-git-props = { id = "com.gorylenko.gradle-git-properties", version.ref = "gradle-git-props" }
@@ -14,6 +15,8 @@ spring-boot      = { id = "org.springframework.boot",            version.ref = "
 spring-dep-mgmt  = { id = "io.spring.dependency-management",     version.ref = "spring-dep-mgmt"  }
 
 [libraries]
+flyway-core                  = { group = "org.flywaydb",             name = "flyway-core"                  }
+hibernate-community-dialects = { group = "org.hibernate.orm",        name = "hibernate-community-dialects" }
 jfiglet                      = { group = "com.github.lalyos",        name = "jfiglet",                     version.ref = "jfiglet" }
 junit-platform-launcher      = { group = "org.junit.platform",       name = "junit-platform-launcher"      }
 kotlin-reflect               = { group = "org.jetbrains.kotlin",     name = "kotlin-reflect"               }
@@ -22,5 +25,8 @@ mockk                        = { group = "io.mockk",                 name = "moc
 spring-boot-devtools         = { group = "org.springframework.boot", name = "spring-boot-devtools"         }
 spring-boot-starter          = { group = "org.springframework.boot", name = "spring-boot-starter"          }
 spring-boot-starter-actuator = { group = "org.springframework.boot", name = "spring-boot-starter-actuator" }
+spring-boot-starter-data-jpa = { group = "org.springframework.boot", name = "spring-boot-starter-data-jpa" }
+spring-boot-starter-flyway   = { group = "org.springframework.boot", name = "spring-boot-starter-flyway"   }
 spring-boot-starter-test     = { group = "org.springframework.boot", name = "spring-boot-starter-test"     }
 spring-boot-starter-web      = { group = "org.springframework.boot", name = "spring-boot-starter-web"      }
+sqlite-jdbc                  = { group = "org.xerial",               name = "sqlite-jdbc",                 version.ref = "sqlite"  }

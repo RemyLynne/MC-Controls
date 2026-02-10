@@ -19,6 +19,12 @@ dependencies {
     implementation(project(":spring"))
 
     implementation(project(":iam:bootstrap"))
+
+    implementation(libs.hibernate.community.dialects)
+    implementation(libs.spring.boot.starter.data.jpa)
+    implementation(libs.spring.boot.starter.flyway)
+    implementation(libs.sqlite.jdbc)
+    implementation(libs.flyway.core)
 }
 
 gitProperties {
