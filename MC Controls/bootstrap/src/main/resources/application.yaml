@@ -34,6 +34,7 @@ spring:
     baseline-on-migrate: true
     baseline-version: 0
     enabled: true
+    locations: classpath:db/migrations
   jpa:
     hibernate:
       ddl-auto: validate

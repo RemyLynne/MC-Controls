@@ -3,6 +3,7 @@ rootProject.name = "MC-Controls"
 include(
     "banner",
     "bootstrap",
+    "domain",
     "domain:validation",
     "frontend",
     "spring",
