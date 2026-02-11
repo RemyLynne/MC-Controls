@@ -14,6 +14,7 @@ dependencies {
     implementation(libs.spring.boot.starter.actuator)
     testImplementation(libs.spring.boot.starter.test)
     implementation(project(":banner"))
+    implementation(project(":cli"))
     implementation(project(":domain:validation"))
     implementation(project(":frontend"))
     implementation(project(":spring"))

@@ -3,6 +3,7 @@ rootProject.name = "MC-Controls"
 include(
     "banner",
     "bootstrap",
+    "cli",
     "domain",
     "domain:validation",
     "frontend",

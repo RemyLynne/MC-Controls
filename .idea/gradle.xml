@@ -10,6 +10,7 @@
             <option value="$PROJECT_DIR$/MC Controls" />
             <option value="$PROJECT_DIR$/MC Controls/banner" />
             <option value="$PROJECT_DIR$/MC Controls/bootstrap" />
+            <option value="$PROJECT_DIR$/MC Controls/cli" />
             <option value="$PROJECT_DIR$/MC Controls/domain" />
             <option value="$PROJECT_DIR$/MC Controls/domain/validation" />
             <option value="$PROJECT_DIR$/MC Controls/frontend" />

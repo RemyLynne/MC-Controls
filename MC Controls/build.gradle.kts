@@ -15,6 +15,9 @@ allprojects {
 
     repositories {
         mavenCentral()
+        maven {
+            url = uri("https://libraries.minecraft.net")
+        }
     }
 }
 
@@ -35,5 +38,8 @@ subprojects {
     }
     tasks.withType<Test> {
         useJUnitPlatform()
+    }
+    tasks.matching { it.name == "bootRun" }.configureEach {
+        (this as org.springframework.boot.gradle.tasks.run.BootRun).workingDir = rootProject.projectDir.resolve("..")
     }
 }

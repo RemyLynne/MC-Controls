@@ -1,11 +1,11 @@
 package dev.lynne.mc_controls.spring
 
-enum class ServerType {
-    CLI,
-    SERVER;
+enum class ServerType(private val profile: String) {
+    CLI(ServerTypeProfiles.CLI),
+    SERVER(ServerTypeProfiles.SERVER);
 
     /**
      * @return profile key
      */
-    operator fun invoke() = "${javaClass.name}@$name"
+    operator fun invoke() = profile
 }

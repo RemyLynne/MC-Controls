@@ -1,4 +1,5 @@
 [versions]
+brigadier        = "1.0.18"
 gradle-git-props = "2.5.6"
 jfiglet          = "0.0.9"
 kotlin           = "2.3.0"
@@ -16,13 +17,14 @@ spring-boot      = { id = "org.springframework.boot",            version.ref = "
 spring-dep-mgmt  = { id = "io.spring.dependency-management",     version.ref = "spring-dep-mgmt"  }
 
 [libraries]
+brigadier                    = { group = "com.mojang",               name = "brigadier",                   version.ref = "brigadier" }
 flyway-core                  = { group = "org.flywaydb",             name = "flyway-core"                  }
 hibernate-community-dialects = { group = "org.hibernate.orm",        name = "hibernate-community-dialects" }
-jfiglet                      = { group = "com.github.lalyos",        name = "jfiglet",                     version.ref = "jfiglet" }
+jfiglet                      = { group = "com.github.lalyos",        name = "jfiglet",                     version.ref = "jfiglet"   }
 junit-platform-launcher      = { group = "org.junit.platform",       name = "junit-platform-launcher"      }
 kotlin-reflect               = { group = "org.jetbrains.kotlin",     name = "kotlin-reflect"               }
 kotlin-test-junit5           = { group = "org.jetbrains.kotlin",     name = "kotlin-test-junit5"           }
-mockk                        = { group = "io.mockk",                 name = "mockk",                       version.ref = "mockk"   }
+mockk                        = { group = "io.mockk",                 name = "mockk",                       version.ref = "mockk"     }
 spring-boot-devtools         = { group = "org.springframework.boot", name = "spring-boot-devtools"         }
 spring-boot-starter          = { group = "org.springframework.boot", name = "spring-boot-starter"          }
 spring-boot-starter-actuator = { group = "org.springframework.boot", name = "spring-boot-starter-actuator" }
@@ -30,4 +32,4 @@ spring-boot-starter-data-jpa = { group = "org.springframework.boot", name = "spr
 spring-boot-starter-flyway   = { group = "org.springframework.boot", name = "spring-boot-starter-flyway"   }
 spring-boot-starter-test     = { group = "org.springframework.boot", name = "spring-boot-starter-test"     }
 spring-boot-starter-web      = { group = "org.springframework.boot", name = "spring-boot-starter-web"      }
-sqlite-jdbc                  = { group = "org.xerial",               name = "sqlite-jdbc",                 version.ref = "sqlite"  }
+sqlite-jdbc                  = { group = "org.xerial",               name = "sqlite-jdbc",                 version.ref = "sqlite"    }
