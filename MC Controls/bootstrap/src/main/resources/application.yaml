@@ -17,6 +17,16 @@ spring:
       - optional:classpath:git.properties
   datasource:
     driver-class-name: org.sqlite.JDBC
+    hikari:
+      connection-test-query: SELECT 1
+      connection-timeout: 2500
+      idle-timeout: 300_000
+      keepalive-time: 60_000
+      leak-detection-threshold: 60000
+      max-lifetime: 1800_000
+      maximum-pool-size: 32
+      minimum-idle: 8
+      validation-timeout: 1000
     url: jdbc:sqlite:${APP_SQLITE_DB_PATH:./data/app.db}
   devtools:
     add-properties: false
