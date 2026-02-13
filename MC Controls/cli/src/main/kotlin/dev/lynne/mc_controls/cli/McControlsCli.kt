@@ -21,9 +21,9 @@ class McControlsCli(
     private val logger = LoggerFactory.getLogger(this.javaClass)
 
     init {
-        dispatcher.register(rootCommand)
         logger.debug("Found ${baseArguments.size} base arguments")
         baseArguments.forEach { rootCommand.then(it.getArgument()) }
+        dispatcher.register(rootCommand)
     }
 
     override fun run(vararg args: String) {
