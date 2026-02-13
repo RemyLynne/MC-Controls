@@ -80,7 +80,7 @@ importers:
         version: 9.39.2
       '@nx/angular':
         specifier: 22.5.0
-        version: 22.5.0(4468d74d731c2e4fa1db3fcb822c2322)
+        version: 22.5.0(5814b74c19c90d8d68d2a288b8c75d7e)
       '@nx/eslint':
         specifier: 22.4.5
         version: 22.4.5(@babel/traverse@7.29.0)(@swc-node/register@1.11.1(@swc/core@1.15.11(@swc/helpers@0.5.18))(@swc/types@0.1.25)(typescript@5.9.3))(@swc/core@1.15.11(@swc/helpers@0.5.18))(@zkochan/js-yaml@0.0.7)(eslint@9.39.2(jiti@2.6.1))(nx@22.4.5(@swc-node/register@1.11.1(@swc/core@1.15.11(@swc/helpers@0.5.18))(@swc/types@0.1.25)(typescript@5.9.3))(@swc/core@1.15.11(@swc/helpers@0.5.18)))
@@ -97,8 +97,8 @@ importers:
         specifier: 22.5.0
         version: 22.5.0(@swc-node/register@1.11.1(@swc/core@1.15.11(@swc/helpers@0.5.18))(@swc/types@0.1.25)(typescript@5.9.3))(@swc/core@1.15.11(@swc/helpers@0.5.18))
       '@schematics/angular':
-        specifier: ~21.1.0
-        version: 21.1.2(chokidar@5.0.0)
+        specifier: ~21.1.4
+        version: 21.1.4(chokidar@5.0.0)
       '@swc-node/register':
         specifier: ~1.11.1
         version: 1.11.1(@swc/core@1.15.11(@swc/helpers@0.5.18))(@swc/types@0.1.25)(typescript@5.9.3)
@@ -3008,6 +3008,10 @@ packages:
 
   '@schematics/angular@21.1.2':
     resolution: {integrity: sha512-kxwxhCIUrj7DfzEtDSs/pi/w+aII/WQLpPfLgoQCWE8/95v60WnTfd1afmsXsFoxikKPxkwoPWtU2YbhSoX9MQ==}
+    engines: {node: ^20.19.0 || ^22.12.0 || >=24.0.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
+
+  '@schematics/angular@21.1.4':
+    resolution: {integrity: sha512-I1zdSNzdbrVCWpeE2NsZQmIoa9m0nlw4INgdGIkqUH6FgwvoGKC0RoOxKAmm6HHVJ48FE/sPI13dwAeK89ow5A==}
     engines: {node: ^20.19.0 || ^22.12.0 || >=24.0.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
 
   '@sigstore/bundle@4.0.0':
@@ -9856,7 +9860,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@nx/angular@22.5.0(4468d74d731c2e4fa1db3fcb822c2322)':
+  '@nx/angular@22.5.0(5814b74c19c90d8d68d2a288b8c75d7e)':
     dependencies:
       '@angular-devkit/core': 21.1.4(chokidar@5.0.0)
       '@angular-devkit/schematics': 21.1.4(chokidar@5.0.0)
@@ -9869,7 +9873,7 @@ snapshots:
       '@nx/webpack': 22.5.0(@babel/traverse@7.29.0)(@rspack/core@1.6.8(@swc/helpers@0.5.18))(@swc-node/register@1.11.1(@swc/core@1.15.11(@swc/helpers@0.5.18))(@swc/types@0.1.25)(typescript@5.9.3))(@swc/core@1.15.11(@swc/helpers@0.5.18))(lightningcss@1.30.2)(nx@22.4.5(@swc-node/register@1.11.1(@swc/core@1.15.11(@swc/helpers@0.5.18))(@swc/types@0.1.25)(typescript@5.9.3))(@swc/core@1.15.11(@swc/helpers@0.5.18)))(typescript@5.9.3)
       '@nx/workspace': 22.5.0(@swc-node/register@1.11.1(@swc/core@1.15.11(@swc/helpers@0.5.18))(@swc/types@0.1.25)(typescript@5.9.3))(@swc/core@1.15.11(@swc/helpers@0.5.18))
       '@phenomnomnominal/tsquery': 6.1.4(typescript@5.9.3)
-      '@schematics/angular': 21.1.2(chokidar@5.0.0)
+      '@schematics/angular': 21.1.4(chokidar@5.0.0)
       '@typescript-eslint/type-utils': 8.55.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
       enquirer: 2.3.6
       magic-string: 0.30.21
@@ -10884,6 +10888,14 @@ snapshots:
     dependencies:
       '@angular-devkit/core': 21.1.2(chokidar@5.0.0)
       '@angular-devkit/schematics': 21.1.2(chokidar@5.0.0)
+      jsonc-parser: 3.3.1
+    transitivePeerDependencies:
+      - chokidar
+
+  '@schematics/angular@21.1.4(chokidar@5.0.0)':
+    dependencies:
+      '@angular-devkit/core': 21.1.4(chokidar@5.0.0)
+      '@angular-devkit/schematics': 21.1.4(chokidar@5.0.0)
       jsonc-parser: 3.3.1
     transitivePeerDependencies:
       - chokidar
