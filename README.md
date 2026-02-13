@@ -57,7 +57,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 [pr-shield]: https://img.shields.io/github/issues-pr/RemyLynne/MC-Controls.svg?style=for-the-badge
 [pr-url]: https://github.com/RemyLynne/MC-Controls/pulls
 [license-shield]: https://img.shields.io/github/license/RemyLynne/MC-Controls.svg?style=for-the-badge
-[license-url]: https://github.com/RemyLynne/MC-Controls/blob/master/LICENSE.txt
+[license-url]: https://github.com/RemyLynne/MC-Controls/blob/master/LICENSE
 [github-actions-tests-shield]: https://github.com/RemyLynne/MC-Controls/actions/workflows/test.yml/badge.svg
 [github-actions-tests-url]: https://github.com/RemyLynne/MC-Controls/actions/workflows/test.yml
 [github-actions-codeql-shield]: https://github.com/RemyLynne/MC-Controls/actions/workflows/github-code-scanning/codeql/badge.svg
