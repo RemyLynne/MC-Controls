@@ -11,5 +11,5 @@ dependencies {
 
     implementation(project(":spring"))
 
-    implementation(libs.brigadier)
+    api(libs.brigadier)
 }
