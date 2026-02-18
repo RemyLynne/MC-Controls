@@ -5,4 +5,4 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface CredentialJpaRepository : JpaRepository<CredentialJpaEntity, Long>
+interface CredentialJpaRepository : JpaRepository<CredentialJpaEntity, Int>

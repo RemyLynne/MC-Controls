@@ -18,6 +18,7 @@ spring:
   datasource:
     driver-class-name: org.sqlite.JDBC
     hikari:
+      connection-init-sql: "PRAGMA foreign_keys=ON"
       connection-test-query: SELECT 1
       connection-timeout: 2500
       idle-timeout: 300_000

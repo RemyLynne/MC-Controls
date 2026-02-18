@@ -3,9 +3,6 @@ package dev.lynne.mc_controls.iam.adapter_out_persistence.entity
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.Id
-import jakarta.persistence.JoinColumn
-import jakarta.persistence.MapsId
-import jakarta.persistence.OneToOne
 import jakarta.persistence.Table
 import java.time.Instant
 
@@ -14,7 +11,7 @@ import java.time.Instant
 data class CredentialJpaEntity(
     @Id
     @Column(name = "USER_ID", nullable = false, updatable = false)
-    val userId: Int? = null,
+    val userId: Int = 0,
 
     @Column(name = "PASSWORD_HASH", nullable = false)
     var passwordHash: String,

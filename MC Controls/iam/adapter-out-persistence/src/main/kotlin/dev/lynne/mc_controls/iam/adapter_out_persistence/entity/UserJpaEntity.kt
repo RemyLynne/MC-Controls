@@ -14,7 +14,7 @@ data class UserJpaEntity(
     @Id
     @GeneratedValue(GenerationType.IDENTITY)
     @Column(name = "ID", updatable = false, insertable = false)
-    val id: Int? = null,
+    val id: Int = 0,
 
     @Column(name = "USERNAME", nullable = false, updatable = false, unique = true)
     val username: String,
