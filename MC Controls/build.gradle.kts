@@ -42,4 +42,7 @@ subprojects {
     tasks.matching { it.name == "bootRun" }.configureEach {
         (this as org.springframework.boot.gradle.tasks.run.BootRun).workingDir = rootProject.projectDir.resolve("..")
     }
+    tasks.withType<Jar>().configureEach {
+        archiveBaseName.set("${project.group}-${project.name}")
+    }
 }
