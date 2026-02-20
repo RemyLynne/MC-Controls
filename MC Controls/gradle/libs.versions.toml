@@ -3,7 +3,7 @@ gradle-git-props = "2.5.7"
 jfiglet          = "0.0.9"
 kotlin           = "2.3.0"
 mockk            = "1.14.9"
-spring-boot      = "4.0.2"
+spring-boot      = "4.0.3"
 spring-dep-mgmt  = "1.1.7"
 
 [plugins]
